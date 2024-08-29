@@ -4,7 +4,6 @@ import org.main.entity.CategoriaFrete;
 import org.main.entity.Cliente;
 import org.main.entity.Distancia;
 import org.main.entity.Frete;
-import org.main.entity.Frete.*;
 import org.main.repository.DAOGenerico;
 
 import jakarta.persistence.EntityManager;
@@ -23,6 +22,7 @@ public class FreteService {
         this.distanciaDAO = new DAOGenerico<>(entityManager);
         this.categoriaFreteDAO = new DAOGenerico<>(entityManager);
     }
+
     public Frete registrarNovoFrete(Frete frete) {
         // Calcular o valor do frete antes de salvar
         calcularValorFrete(frete);
@@ -48,16 +48,16 @@ public class FreteService {
     private void calcularValorFrete(Frete frete) {
         // Recuperar a distância entre as cidades de origem e destino
         Optional<Distancia> distancia = distanciaDAO.getManager()
-                .createQuery("SELECT d FROM Distancia d WHERE d.origemUf = :origemUf AND d.origemNome = :origemNome AND d.destinoUf = :destinoUf AND d.destinoNome = :destinoNome", Distancia.class)
-                .setParameter("origemUf", frete.getCidadeOrigemUf())
-                .setParameter("origemNome", frete.getCidadeOrigemNome())
-                .setParameter("destinoUf", frete.getCidadeDestinoUf())
-                .setParameter("destinoNome", frete.getCidadeDestinoNome())
+                .createQuery("SELECT d FROM Distancia d WHERE d.cidadeOrigem.uf = :origemUf AND d.cidadeOrigem.nome = :origemNome AND d.cidadeDestino.uf = :destinoUf AND d.cidadeDestino.nome = :destinoNome", Distancia.class)
+                .setParameter("origemUf", frete.getCidadeOrigem().getUf())
+                .setParameter("origemNome", frete.getCidadeOrigem().getNome())
+                .setParameter("destinoUf", frete.getCidadeDestino().getUf())
+                .setParameter("destinoNome", frete.getCidadeDestino().getNome())
                 .getResultList().stream().findFirst();
 
         if (distancia.isPresent()) {
             // Recuperar o percentual adicional da categoria de frete
-            CategoriaFrete categoriaFrete = categoriaFreteDAO.buscaPorId(CategoriaFrete.class, frete.getCategoriaFreteId());
+            CategoriaFrete categoriaFrete = categoriaFreteDAO.buscaPorId(CategoriaFrete.class, frete.getCategoriaFrete().getId());
             float valorTotal = distancia.get().getQuilometros() * frete.getValorKmRodado();
             valorTotal += valorTotal * (categoriaFrete.getPercentualAdicional() / 100);
 
@@ -66,5 +66,4 @@ public class FreteService {
             throw new IllegalArgumentException("Distância não encontrada entre as cidades especificadas.");
         }
     }
-
 }

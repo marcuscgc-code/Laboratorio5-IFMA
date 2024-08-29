@@ -1,9 +1,10 @@
 package org.main.entity;
 
 import lombok.*;
-
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
+
 
 @Getter @Setter @Builder
 @NoArgsConstructor @AllArgsConstructor
@@ -12,31 +13,29 @@ import java.io.Serializable;
 @IdClass(Distancia.DistanciaId.class)
 public class Distancia implements EntidadeBase {
 
-    @EqualsAndHashCode.Include
     @Id
-    @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "cidadeOrigemUf", referencedColumnName = "uf"),
-            @JoinColumn(name = "cidadeOrigemNome", referencedColumnName = "nome")
-    })
-    private Cidade cidadeOrigem;
+    @Column(name = "cidadeOrigemUf")
+    private String cidadeOrigemUf;
 
-    @EqualsAndHashCode.Include
     @Id
-    @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "cidadeDestinoUf", referencedColumnName = "uf"),
-            @JoinColumn(name = "cidadeDestinoNome", referencedColumnName = "nome")
-    })
-    private Cidade cidadeDestino;
+    @Column(name = "cidadeOrigemNome")
+    private String cidadeOrigemNome;
+
+    @Id
+    @Column(name = "cidadeDestinoUf")
+    private String cidadeDestinoUf;
+
+    @Id
+    @Column(name = "cidadeDestinoNome")
+    private String cidadeDestinoNome;
 
     private Integer quilometros;
 
     @Override
     public Integer getId() {
         // Usando um hashcode das chaves compostas para representar o ID
-        return (cidadeOrigem.getUf() + cidadeOrigem.getNome() +
-                cidadeDestino.getUf() + cidadeDestino.getNome()).hashCode();
+        return (cidadeOrigemUf + cidadeOrigemNome +
+                cidadeDestinoUf + cidadeDestinoNome).hashCode();
     }
 
     @Data @NoArgsConstructor @AllArgsConstructor
@@ -45,5 +44,22 @@ public class Distancia implements EntidadeBase {
         private String cidadeOrigemNome;
         private String cidadeDestinoUf;
         private String cidadeDestinoNome;
+
+        // Implementar equals e hashCode para DistanciaId
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            DistanciaId that = (DistanciaId) o;
+            return cidadeOrigemUf.equals(that.cidadeOrigemUf) &&
+                    cidadeOrigemNome.equals(that.cidadeOrigemNome) &&
+                    cidadeDestinoUf.equals(that.cidadeDestinoUf) &&
+                    cidadeDestinoNome.equals(that.cidadeDestinoNome);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(cidadeOrigemUf, cidadeOrigemNome, cidadeDestinoUf, cidadeDestinoNome);
+        }
     }
 }

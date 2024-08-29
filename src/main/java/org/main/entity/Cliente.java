@@ -3,23 +3,28 @@ package org.main.entity;
 import lombok.*;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter @Setter @Builder
+import java.util.HashSet;
+import java.util.Set;
+
+import lombok.AllArgsConstructor;
+
 @NoArgsConstructor @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Cliente implements EntidadeBase {
+@Table(name= "cliente")
+public @Data class Cliente extends PessoaFisica {
 
-    @EqualsAndHashCode.Include
-    @Id
-    private String cpf;
-
+    @Column
     private String contato;
 
+    @Column
     private Boolean ativo;
 
-    @Override
-    public Integer getId() {
-        return cpf != null ? cpf.hashCode() : null;
-    }
+    @OneToMany(mappedBy = "cliente")
+    private Set<Frete> fretes = new HashSet<>();
+
+
 }
