@@ -1,9 +1,12 @@
 package org.main.entity;
 
 import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.math.BigDecimal;
 
 
 @Getter @Setter @Builder
@@ -11,32 +14,25 @@ import java.util.Objects;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @IdClass(Distancia.DistanciaId.class)
-public class Distancia implements EntidadeBase {
+public @Data class Distancia implements EntidadeBase {
 
-    @Id
-    @Column(name = "cidadeOrigemUf")
-    private String cidadeOrigemUf;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @Id
-    @Column(name = "cidadeOrigemNome")
-    private String cidadeOrigemNome;
+    @ManyToOne
+    @JoinColumn(name = "id_cidade_origem")
+    private Cidade cidadeOrigem;
 
-    @Id
-    @Column(name = "cidadeDestinoUf")
-    private String cidadeDestinoUf;
+    @ManyToOne
+    @JoinColumn(name = "id_cidade_destino")
+    private Cidade cidadeDestino;
 
-    @Id
-    @Column(name = "cidadeDestinoNome")
-    private String cidadeDestinoNome;
-
+    @Column
     private Integer quilometros;
 
-    @Override
-    public Integer getId() {
-        // Usando um hashcode das chaves compostas para representar o ID
-        return (cidadeOrigemUf + cidadeOrigemNome +
-                cidadeDestinoUf + cidadeDestinoNome).hashCode();
-    }
+
+    //SOBRESCREVENDO DOT -- chamando construtores
+
 
     @Data @NoArgsConstructor @AllArgsConstructor
     public static class DistanciaId implements Serializable {

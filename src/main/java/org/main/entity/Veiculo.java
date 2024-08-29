@@ -1,29 +1,29 @@
 package org.main.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import jakarta.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-@Getter @Setter @Builder
-@NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@AllArgsConstructor @NoArgsConstructor
+@Table(name = "veiculo")
 @Entity
-public class Veiculo implements EntidadeBase {
+public @Data class Veiculo implements EntidadeBase {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @EqualsAndHashCode.Include
-    @Id
-    private String numeroPlaca;
-
-    @ManyToOne
-    @JoinColumn(name = "filialNome")
+    @ManyToOne @JoinColumn(name = "id_filial")
     private Filial filial;
 
-    @ManyToOne
-    @JoinColumn(name = "tipoVeiculoId")
+    @ManyToOne @JoinColumn(name = "id_tipo_veiculo")
     private TipoVeiculo tipoVeiculo;
 
-    @Override
-    public Integer getId() {
-        return numeroPlaca != null ? numeroPlaca.hashCode() : null;
-    }
+    @Column (name = "numero_placa", nullable = false)
+    private String numeroPlaca;
+
+    @OneToMany(mappedBy = "veiculo")
+    private Set<Frete> fretes = new HashSet<>();
+
 }

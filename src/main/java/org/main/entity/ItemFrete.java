@@ -1,26 +1,26 @@
 package org.main.entity;
 
-import lombok.*;
-
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter @Setter @Builder
-@NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@AllArgsConstructor @NoArgsConstructor
+@Table (name = "item_frete")
 @Entity
-public class ItemFrete implements EntidadeBase {
+public @Data class ItemFrete implements EntidadeBase {
 
-    @EqualsAndHashCode.Include
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToOne @JoinColumn(name = "id_frete")
+    private Frete frete;
+
+    @Column(nullable = false)
     private String descricao;
 
-    private Float peso;
-
-    @ManyToOne
-    @JoinColumn(name = "freteId")
-    private Frete frete;
+    @Column(nullable = false)
+    private float peso;
 
     @Override
     public Integer getId() {

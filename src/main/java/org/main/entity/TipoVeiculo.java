@@ -4,22 +4,23 @@ import lombok.*;
 
 import jakarta.persistence.*;
 
-@Getter @Setter @Builder
-@NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity
-public class TipoVeiculo implements EntidadeBase {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.math.BigDecimal;
 
-    @EqualsAndHashCode.Include
+
+@NoArgsConstructor @AllArgsConstructor
+@Table(name = "tipo_veiculo")
+@Entity
+public @Data class TipoVeiculo implements EntidadeBase {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column (nullable = false)
     private String descricao;
 
-    private Float pesoMaximo;
-
-    @Override
-    public Integer getId() {
-        return id;
-    }
+    @Column(name = "peso_maximo")
+    private BigDecimal pesoMaximo;
 }

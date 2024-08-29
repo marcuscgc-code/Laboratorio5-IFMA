@@ -1,22 +1,29 @@
 package org.main.entity;
 
-import lombok.*;
-
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-@Getter @Setter @Builder
+
+import java.util.HashSet;
+import java.util.Set;
+
+
 @NoArgsConstructor @AllArgsConstructor
+@Data
+@Entity (name = "funcionario")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity
 public class Funcionario implements EntidadeBase {
 
-    @EqualsAndHashCode.Include
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer matricula;
+    @Column(length = 20, nullable = false)
+    private String matricula;
 
     @ManyToOne
-    @JoinColumn(name = "cpf")
-    private PessoaFisica pessoaFisica;
+    @JoinColumn(name = "filial_id")
+    private Filial filial;
+
 
     @Override
     public Integer getId() {
