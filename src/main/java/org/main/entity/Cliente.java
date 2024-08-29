@@ -2,7 +2,7 @@ package org.main.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Getter @Setter @Builder
 @NoArgsConstructor @AllArgsConstructor

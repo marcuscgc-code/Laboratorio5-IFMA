@@ -1,27 +1,31 @@
 package org.main.entity;
 
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-@Getter @Setter @Builder
-@NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@AllArgsConstructor @NoArgsConstructor
+@Table (name = "categoria_frete")
 @Entity
-public class CategoriaFrete implements EntidadeBase {
-
-    @EqualsAndHashCode.Include
+public @Data class CategoriaFrete implements EntidadeBase {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false)
     private String nome;
 
+    @Column(nullable = false)
     private String descricao;
 
-    private Float percentualAdicional;
+    @Column (name = "percentual_adicional")
+    private float percentualAdicional;
 
-    @Override
-    public Integer getId() {
-        return id;
-    }
+    @OneToMany(mappedBy = "categoriaFrete", cascade = CascadeType.ALL)
+    private Set<Frete> fretes = new HashSet<>();
+
 }
+

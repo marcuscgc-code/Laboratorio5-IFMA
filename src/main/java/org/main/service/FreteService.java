@@ -1,13 +1,13 @@
 package org.main.service;
 
-import entity.CategoriaFrete;
-import entity.Cliente;
-import entity.Distancia;
-import entity.Frete;
-import entity.Frete.*;
-import repository.DAOGenerico;
+import org.main.entity.CategoriaFrete;
+import org.main.entity.Cliente;
+import org.main.entity.Distancia;
+import org.main.entity.Frete;
+import org.main.entity.Frete.*;
+import org.main.repository.DAOGenerico;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
