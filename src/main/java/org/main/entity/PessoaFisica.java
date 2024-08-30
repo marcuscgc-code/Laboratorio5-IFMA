@@ -3,26 +3,29 @@ package org.main.entity;
 import lombok.*;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import java.util.List;
 
-@Getter @Setter @Builder
-@NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
+
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table (name = "pessoa_fisica")
 @Entity
-public class PessoaFisica implements EntidadeBase {
+public @Data abstract class PessoaFisica implements EntidadeBase {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @EqualsAndHashCode.Include
-    @Id
-    private String cpf;
-
+    @Column(nullable = false)
     private String nome;
 
+    @Column(nullable = false)
+    private String cpf;
+
+    @Column
     private String email;
 
+    @Column
     private String telefone;
 
-    @Override
-    public Integer getId() {
-        // Considerando que CPF é a chave primária, podemos retornar um hashcode como id único.
-        return cpf != null ? cpf.hashCode() : null;
-    }
 }

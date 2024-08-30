@@ -7,9 +7,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
-@Getter @Setter @Builder
 @NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table (name = "dependente")
 @Entity
 public @Data class Dependente implements EntidadeBase {
@@ -26,8 +24,5 @@ public @Data class Dependente implements EntidadeBase {
     @Column (name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 
-    @Override
-    public Integer getId() {
-        return id;
-    }
+
 }

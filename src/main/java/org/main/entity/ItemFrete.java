@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Table (name = "item_frete")
 @Entity
 public @Data class ItemFrete implements EntidadeBase {
-
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -22,8 +21,5 @@ public @Data class ItemFrete implements EntidadeBase {
     @Column(nullable = false)
     private float peso;
 
-    @Override
-    public Integer getId() {
-        return id;
-    }
+
 }

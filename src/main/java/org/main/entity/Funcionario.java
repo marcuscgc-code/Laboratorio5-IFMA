@@ -15,7 +15,7 @@ import java.util.Set;
 @Data
 @Entity (name = "funcionario")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Funcionario implements EntidadeBase {
+public class Funcionario extends PessoaFisica {
 
     @Column(length = 20, nullable = false)
     private String matricula;
@@ -25,8 +25,5 @@ public class Funcionario implements EntidadeBase {
     private Filial filial;
 
 
-    @Override
-    public Integer getId() {
-        return matricula;
-    }
+
 }

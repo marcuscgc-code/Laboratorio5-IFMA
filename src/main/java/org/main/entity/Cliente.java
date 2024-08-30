@@ -12,7 +12,6 @@ import java.util.Set;
 import lombok.AllArgsConstructor;
 
 @NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name= "cliente")
 public @Data class Cliente extends PessoaFisica {

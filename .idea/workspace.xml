@@ -7,15 +7,26 @@
     <list default="true" id="6a24fb4d-3b81-421e-bbfa-cfbfcfc7e3b5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/main/entity/Cidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/entity/Cidade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/main/entity/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/entity/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/main/entity/Dependente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/entity/Dependente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/main/entity/Distancia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/entity/Distancia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/main/entity/Frete.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/entity/Frete.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/main/service/FreteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/service/FreteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/main/entity/Filial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/entity/Filial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/main/entity/Funcionario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/entity/Funcionario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/main/entity/ItemFrete.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/entity/ItemFrete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/main/entity/PessoaFisica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/entity/PessoaFisica.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -93,16 +104,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/main/Main.java</url>
-          <line>6</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

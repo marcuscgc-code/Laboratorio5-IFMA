@@ -13,10 +13,8 @@ import java.util.HashSet;
 
 
 @NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table (name = "cidade")
-@IdClass(Cidade.CidadeId.class)
 public @Data class Cidade implements EntidadeBase {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,9 +42,5 @@ public @Data class Cidade implements EntidadeBase {
     private Set<Distancia> distanciasDeDestino = new HashSet<>();
 
 
-    @Data @NoArgsConstructor @AllArgsConstructor
-    public static class CidadeId implements Serializable {
-        private String uf;
-        private String nome;
-    }
+
 }

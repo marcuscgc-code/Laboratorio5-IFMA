@@ -10,15 +10,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-
-@Getter @Setter @Builder
 @NoArgsConstructor @AllArgsConstructor
 @Data
 @Entity
 @Table(name = "filial")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Filial implements EntidadeBase {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -37,6 +34,7 @@ public class Filial implements EntidadeBase {
     private Set<Funcionario> funcionarios = new HashSet<>();
 
     @OneToMany(mappedBy = "filial")
+    private Set<Veiculo> veiculos = new HashSet<>();
 
     @Override
     public Integer getId() {
