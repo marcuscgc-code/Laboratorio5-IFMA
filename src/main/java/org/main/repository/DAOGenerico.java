@@ -1,60 +1,59 @@
 package org.main.repository;
 
+import org.main.entity.EntidadeBase;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import org.main.entity.EntidadeBase;
-
 import java.util.List;
 import java.util.Objects;
 
 public class DAOGenerico<T extends EntidadeBase> {
+    private final EntityManager em;
 
-    private final EntityManager manager;
-
-    // Construtor que recebe EntityManager
+    // Construtor que recebe o EntityManager
     public DAOGenerico(EntityManager manager) {
-        this.manager = manager;
+        this.em = manager;
     }
 
-    public EntityManager getManager() {
-        return manager;
+    // Busca uma entidade pelo seu ID
+    public T buscarPorID(Class<T> clazz, Integer id) {
+        return em.find(clazz, id);
     }
 
-    // Busca entidade pelo seu Id
-    public T buscaPorId(Class<T> clazz, Integer id) {
-        return manager.find(clazz, id);
-    }
 
     // Salva ou atualiza uma entidade
     public T salvaOuAtualiza(T t) {
         // Inicia uma transação
-        manager.getTransaction().begin();
+        em.getTransaction().begin();
         try {
             if (Objects.isNull(t.getId())) {
                 // Se a entidade não tem ID, é uma nova entidade (inserção)
-                manager.persist(t);
+                em.persist(t);
             } else {
                 // Se a entidade tem ID, é uma entidade existente (atualização)
-                t = manager.merge(t);
+                t = em.merge(t);
             }
             // Confirma as alterações na transação
-            manager.getTransaction().commit();
+            em.getTransaction().commit();
         } catch (Exception e) {
             // Reverte as alterações em caso de erro
-            manager.getTransaction().rollback();
+            em.getTransaction().rollback();
             throw e; // Lança a exceção para ser tratada em outro lugar
         }
         return t;
     }
 
-    public void remove(T t) {
-        manager.remove(t);
-        manager.flush();
+    // Exclui uma entidade
+    public void excluir(T t) {
+        // Remove a entidade do contexto de persistência
+        em.remove(t);
+        // Força a sincronização com o banco de dados
+        em.flush();
     }
 
     // Executa uma consulta JPQL com parâmetros
     public List<T> consultar(String jpql, Class<T> clazz, Object... params) {
-        TypedQuery<T> query = manager.createQuery(jpql, clazz);
+        TypedQuery<T> query = em.createQuery(jpql, clazz);
+
         // Define os parâmetros da consulta
         for (int i = 0; i < params.length; i += 2) {
             query.setParameter(params[i].toString(), params[i + 1]);
